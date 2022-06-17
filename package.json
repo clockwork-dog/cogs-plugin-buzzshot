@@ -11,7 +11,9 @@
   },
   "scripts": {
     "start": "cross-env BROWSER=scripts/openSimulator.js PORT=3001 react-scripts start",
-    "build": "react-scripts build",
+    "build-content": "cross-env BUILD_PATH=build/co.buzzshot.groups react-scripts build",
+    "build-manifest": "mkdir -p build/co.buzzshot.groups && cp -fv cogs-plugin-manifest.json build/co.buzzshot.groups/cogs-plugin-manifest.json",
+    "build": "yarn build-content && yarn build-manifest",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
