@@ -1,14 +1,14 @@
-# My custom COGS Media Master content
+# COGS <-> Buzzshot groups plugin
 
-This is a [`create-react-app`](https://create-react-app.dev) Typescript project that connects to [COGS](https://cogs.show) using [`@clockworkdog/cogs-client-react`](https://www.npmjs.com/package/@clockworkdog/cogs-client-react).
+This plugin is a work in progress.
 
 ## Local development in a browser
 
 ```
-yarn start "My custom Media Master"
+yarn start "My Test Media Master Name"
 ```
 
-This will connect to COGS as a simulator for the Media Master called "My custom Media Master".
+This will connect to COGS as a simulator for the Media Master called "My Test Media Master Name".
 
 ## Build for your COGS project
 
