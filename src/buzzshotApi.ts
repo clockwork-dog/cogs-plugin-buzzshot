@@ -1,4 +1,4 @@
-import base64 from "base-64";
+// import base64 from "base-64";
 import { useEffect, useState } from "react";
 
 const ENDPOINT = "https://buzzshot.co";
@@ -51,11 +51,12 @@ export async function setBuzzshotGroupName(
   ).objects;
 }
 
-function authHeaders(apiKey: string) {
-  return {
-    Authorization: `Basic ${base64.encode(apiKey + ":x")}`,
-  };
-}
+// Currently doesn't work
+// function authHeaders(apiKey: string) {
+//   return {
+//     Authorization: `Basic ${base64.encode(apiKey + ":x")}`,
+//   };
+// }
 
 export function useBuzzshotPendingGroups(apiKey: string | undefined) {
   const [pendingGroups, setPendingGroups] = useState<BuzzshotGroup[]>();
