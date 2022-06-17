@@ -1,0 +1,25 @@
+{
+  "name": "Buzzshot Groups",
+  "version": "0.1.0",
+  "description": "Get and set group names on Buzzshot",
+  "icon": "cactus",
+  "config": [{ "name": "API Key", "value": { "type": "string" } }],
+  "window": {
+    "width": 500,
+    "height": 500
+  },
+  "events": {
+    "toCogs:": [
+      {
+        "name": "Group Selected",
+        "value": { "type": "string" }
+      }
+    ],
+    "fromCogs": [
+      {
+        "name": "Set Group Name",
+        "value": { "type": "string" }
+      }
+    ]
+  }
+}

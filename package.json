@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@clockworkdog/cogs-client-react": "1",
+    "base-64": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1"
@@ -33,6 +34,7 @@
   },
   "homepage": "./",
   "devDependencies": {
+    "@types/base-64": "^1.0.0",
     "@types/node": "14",
     "@types/react": "18",
     "@types/react-dom": "18",
