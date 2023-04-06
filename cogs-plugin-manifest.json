@@ -1,23 +1,97 @@
 {
-  "name": "Buzzshot Groups",
+  "name": "Buzzshot",
   "version": "0.1.0",
-  "description": "Get and set group names on Buzzshot",
+  "description": "Exchange data between Buzzshot and COGS",
+  "indexPath": "index.html",
   "icon": "cactus",
   "config": [{ "name": "API Key", "value": { "type": "string" } }],
   "window": {
     "width": 500,
     "height": 500
   },
+  "state": [
+    {
+    "name": "Team Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  },
+    {
+    "name": "Game Selected",
+    "value": {"type": "boolean", "default": false},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player Count",
+    "value": {"type": "number", "default": 0},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player 1 Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player 2 Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player 3 Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player 4 Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player 5 Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player 6 Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player 7 Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player 8 Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  },
+    {
+    "name": "Player 9 Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
+  }
+  ],
   "events": {
-    "toCogs:": [
-      {
-        "name": "Group Selected",
-        "value": { "type": "string" }
-      }
-    ],
+    "toCogs:": [],
     "fromCogs": [
       {
-        "name": "Set Group Name",
+        "name": "Set Team Name",
+        "value": { "type": "string" }
+      },
+      {
+        "name": "Set Did Win",
+        "value": { "type": "boolean" }
+      },
+      {
+        "name": "Set Completion Time (milliseconds)",
+        "value": { "type": "number" }
+      },
+      {
+        "name": "Set Hints",
+        "value": { "type": "number" }
+      },
+      {
+        "name": "Complete Game",
         "value": { "type": "string" }
       }
     ]

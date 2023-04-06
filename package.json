@@ -3,16 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@clockworkdog/cogs-client-react": "1",
+    "@clockworkdog/cogs-client": "^1.5.6",
     "base-64": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "tailwindcss": "^3.3.1",
+    "typescript-event-target": "^1.0.4"
   },
   "scripts": {
     "start": "cross-env BROWSER=scripts/openSimulator.js PORT=3001 react-scripts start",
-    "build-content": "cross-env BUILD_PATH=build/co.buzzshot.groups react-scripts build",
-    "build-manifest": "mkdir -p build/co.buzzshot.groups && cp -fv cogs-plugin-manifest.json build/co.buzzshot.groups/cogs-plugin-manifest.json",
+    "build-content": "cross-env BUILD_PATH=build/com.buzzshot.cogs react-scripts build",
+    "build-manifest": "mkdir -p build/com.buzzshot.cogs && cp -fv cogs-plugin-manifest.json build/com.buzzshot.cogs/cogs-plugin-manifest.json",
     "build": "yarn build-content && yarn build-manifest",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

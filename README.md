@@ -1,23 +1,11 @@
-# COGS <-> Buzzshot groups plugin
+# COGS <-> Buzzshot
 
-This plugin is a work in progress.
+WORK IN PROGRESS NOT READY FOR USE JUST YET (BUT GET IN TOUCH IN YOU WANT TO TRY IT!)
 
-## Local development in a browser
+This plugin allows you to automatically transfer data between Buzzshot and COGS.
+It will give you a window when you start your COGS show in which you can select
+a Buzzshot game.
 
-```
-yarn start "My Test Media Master Name"
-```
-
-This will connect to COGS as a simulator for the Media Master called "My Test Media Master Name".
-
-## Build for your COGS project
-
-```
-yarn build
-```
-
-The `build` directory can now be used by COGS as custom Media Master content.
-
-You can place this entire project in your COGS project's `client_content` directory or, once built, you can copy the `build` directory to your COGS project's `client_content` directory. Select the built directory/subdirectory from COGS as your custom Media Master's "Content directory".
-
-![Screenshot from 2021-10-01 09-31-04](https://user-images.githubusercontent.com/292958/135590011-c3d30df6-5590-4a44-8160-f31e3cd4008e.png)
+Until a game is selected the plugin will not be able to sync data. We recommend
+adding a checklist item to your COGS pre-show with a condition that "Game
+Selected" is ON.

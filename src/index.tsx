@@ -1,12 +1,12 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import { CogsConnectionProvider } from "@clockworkdog/cogs-client-react";
+import { BuzzshotCogsPluginProvider } from "./BuzzshotCogsPluginProvider";
 
 function Root() {
   return (
-    <CogsConnectionProvider audioPlayer videoPlayer>
+    <BuzzshotCogsPluginProvider>
       <App />
-    </CogsConnectionProvider>
+    </BuzzshotCogsPluginProvider>
   );
 }
 

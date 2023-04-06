@@ -21,14 +21,14 @@ jobs:
       - run: yarn
       - run: yarn build
       - working-directory: build
-        run: zip -r co.buzzshot.groups.zip co.buzzshot.groups
+        run: zip -r com.buzzshot.cogs.zip com.buzzshot.cogs
       - uses: actions/upload-artifact@v1
         with:
-          name: co.buzzshot.groups.zip
-          path: build/co.buzzshot.groups.zip
+          name: com.buzzshot.cogs.zip
+          path: build/com.buzzshot.cogs.zip
       - uses: ncipollo/release-action@v1
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           allowUpdates: true
-          artifacts: co.buzzshot.groups.zip
+          artifacts: com.buzzshot.cogs.zip
           token: ${{ secrets.GITHUB_TOKEN }}
