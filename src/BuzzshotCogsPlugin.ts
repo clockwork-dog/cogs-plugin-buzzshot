@@ -3,7 +3,7 @@ import {
 } from "@clockworkdog/cogs-client";
 import { TypedEventTarget } from 'typescript-event-target';
 
-import { BuzzshotApi, Game } from "buzzshot";
+import { BuzzshotApi, Game } from "@buzzshot/api";
 
 interface CogsConnectionParams {
   config: {

@@ -1,4 +1,4 @@
-import { Game } from "buzzshot";
+import { Game } from "@buzzshot/api";
 import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import { useBuzzshotCogsPlugin, useGame, useBuzzshotApi, useGamesToday} from "./BuzzshotCogsPluginProvider";

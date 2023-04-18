@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
-import {BuzzshotApiException, ResponsePage, type Game} from "buzzshot";
+import {BuzzshotApiException, ResponsePage, type Game} from "@buzzshot/api";
 import { BuzzshotCogsPlugin } from "./BuzzshotCogsPlugin";
 
 const BuzzshotCogsPluginContext = React.createContext<BuzzshotCogsPlugin|undefined>(undefined);
