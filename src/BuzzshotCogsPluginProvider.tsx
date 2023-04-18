@@ -49,6 +49,22 @@ export function useBuzzshotApi() {
   return plugin.api;
 }
 
+export function useBuzzshotConfigError() {
+  const plugin = useBuzzshotCogsPlugin();
+  const [error, setError] = useState<string|undefined>(undefined);
+  const update = (event:CustomEvent<string>) => setError(event.detail);
+  const remove = () => setError(undefined);
+  useEffect(() => {
+    plugin.addEventListener('configError', update);
+    plugin.addEventListener('configSuccess', remove);
+    return () => {
+      plugin.removeEventListener('configError', update);
+      plugin.removeEventListener('configSuccess', remove);
+    };
+  })
+  return error;
+}
+
 
 export function useGamesToday() {
   const api = useBuzzshotApi();

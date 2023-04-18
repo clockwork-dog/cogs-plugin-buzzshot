@@ -1,7 +1,7 @@
 import { Game } from "@buzzshot/api";
 import React, { useCallback, useEffect } from "react";
 import "./App.css";
-import { useBuzzshotCogsPlugin, useGame, useBuzzshotApi, useGamesToday} from "./BuzzshotCogsPluginProvider";
+import { useBuzzshotCogsPlugin, useGame, useBuzzshotApi, useGamesToday, useBuzzshotConfigError} from "./BuzzshotCogsPluginProvider";
 
 function classNames(
   ...classes: (string | null | boolean | undefined)[]
@@ -14,6 +14,7 @@ export default function App() {
   const selectedGame = useGame();
   const api = useBuzzshotApi();
   const selectedGameId = selectedGame?.id;
+  const configError = useBuzzshotConfigError();
 
   const refreshGame = () => {
     if (api && selectedGameId) {
@@ -22,10 +23,10 @@ export default function App() {
   };
 
   return (
-    <div className="bg-red-500 flex flex-col items-stretch ">
-      {!api ? <Message>Connecting to COGS...</Message> : null }
+    <div className="flex flex-col items-stretch ">
+      {!api ? <Message>{configError || 'Connecting to COGS...'}</Message> : null }
       {!selectedGame && api ? <SelectGame onSelectGame={game => plugin.setGame(game)}/> : null }
-      {selectedGame && <Header selectedGame={selectedGame} onClickChange={() => plugin.setGame(undefined)} onClickRefresh={refreshGame}/>}
+      {selectedGame && api && <Header selectedGame={selectedGame} onClickChange={() => plugin.setGame(undefined)} onClickRefresh={refreshGame}/>}
     </div>
   );
 }

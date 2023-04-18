@@ -41,6 +41,8 @@ interface CogsConnectionParams {
 type Events = {
   game: CustomEvent<Game|undefined>;
   api: CustomEvent<BuzzshotApi>;
+  configError: CustomEvent<string>;
+  configSuccess: CustomEvent<void>;
 };
 
 export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
@@ -52,11 +54,17 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
     super()
     this.connection = new CogsConnection<CogsConnectionParams>();
     this.connection.addEventListener('config', (event) => {
-      const api = new BuzzshotApi(event.detail["API Key"]);
+      const apiKey = event.detail["API Key"];
+      if (!apiKey) {
+        this.dispatchTypedEvent("configError", new CustomEvent("configError", {detail: "Please supply a Buzzshot API Key in the plugin settings"}));
+        return;
+      }
+      const api = new BuzzshotApi(apiKey);
       this.api = api;
       this.dispatchTypedEvent("api", new CustomEvent("api", {detail: api}));
       this.updateOutputPortValues();
       this.forceWindow();
+        this.dispatchTypedEvent("configSuccess", new CustomEvent("configSuccess", {}));
     });
     this.connection.addEventListener('open', () => this.updateOutputPortValues());
     this.connection.addEventListener('event', event => this.handleCogsEvent(event.detail.key, event.detail.value));
