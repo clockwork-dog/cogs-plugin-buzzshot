@@ -52,6 +52,11 @@ function SelectGame(props: { onSelectGame: (g: Game) => void }) {
       {games.loading && <Message>Loading games</Message>}
       {games.error && <Message><div>Failed to load games</div><BlueButton onClick={games.refresh}>Try Again</BlueButton></Message>}
       <h1 className="text-3xl text-center text-gray-500 font-bold p-4">Select the Buzzshot group playing</h1>
+      { games.results.length === 0 ? (
+          <div className="grow flex items-center justify-center">
+            <div className="text-gray-400 text-xl">No pending groups for today</div>
+          </div>
+      ) : (
       <ul className="grow flex flex-col items-stretch gap-1 p-4 ">
         {games.results.map((game) => (
           <li key={game.id} className="flex flex-col items-stretch">
@@ -59,6 +64,7 @@ function SelectGame(props: { onSelectGame: (g: Game) => void }) {
           </li>
         ))}
       </ul>
+      )}
       <div className="flex flex-row justify-between bg-gray-100 p-4 ">
         <div>
           <BlueButton onClick={games.previousPage}>Prev</BlueButton>
