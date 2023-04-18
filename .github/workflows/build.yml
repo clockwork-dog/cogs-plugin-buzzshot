@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 16.x
           cache: "yarn"
-      - run: yarn
+      - run: yarn install --frozen-lockfile
       - run: yarn build
       - working-directory: build
         run: zip -r com.buzzshot.cogs.zip com.buzzshot.cogs
