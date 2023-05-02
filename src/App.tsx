@@ -100,7 +100,7 @@ function Header({selectedGame, onClickChange, onClickRefresh}: {selectedGame:Gam
       </div>
 
       <div className="absolute right-3 top-3 flex flex-col gap-2">
-        <BlueButton onClick={onClickChange} className="">Reset</BlueButton>
+        <BlueButton onClick={onClickChange} className="">Change</BlueButton>
         <BlueButton onClick={onClickRefresh} className="">Refresh</BlueButton>
       </div>
     </div>
