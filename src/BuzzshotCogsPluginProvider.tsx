@@ -78,7 +78,7 @@ export function useGamesToday() {
   useEffect(() => {
     if (api) {
       setLoading(true);
-      api.games.list({page, date: "today"}).then(
+      api.games.list({page, date: "today", complete: false}).then(
         r => {setError(undefined); setResults(r); setLoading(false)},
         e => {setError(e); setLoading(false)}
       );
