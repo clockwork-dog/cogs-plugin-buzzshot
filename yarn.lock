@@ -1079,10 +1079,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@buzzshot/api@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@buzzshot/api/-/api-0.1.2.tgz#895340b9937c765085af87c6cc49c154d2671804"
-  integrity sha512-pLUlkXPvL24Nb8wD4SoPOw2m8+SIl/SiPifVp2ayOo6D6t+S/9z0WBGINn1Jn577nENSxqckUkpn9HSMrbUonQ==
+"@buzzshot/api@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@buzzshot/api/-/api-0.1.4.tgz#4f611978dfe728af172adce13021c2b083315d0e"
+  integrity sha512-Qv1Q8lnGwyDVnfI/bTZuPMPoCLNZSnT6IFV2sAh9R03nk43l8nikjHWwyIMdvxqkySfqKP6vpWr7pB92oq2PWQ==
 
 "@clockworkdog/cogs-client@^1.5.6":
   version "1.5.6"
