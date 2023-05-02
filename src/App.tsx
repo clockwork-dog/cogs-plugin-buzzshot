@@ -26,7 +26,7 @@ export default function App() {
     <div className="flex flex-col items-stretch ">
       {!api ? <Message>{configError || 'Connecting to COGS...'}</Message> : null }
       {!selectedGame && api ? <SelectGame onSelectGame={game => plugin.setGame(game)}/> : null }
-      {selectedGame && api && <Header selectedGame={selectedGame} onClickChange={() => plugin.setGame(undefined)} onClickRefresh={refreshGame}/>}
+      {selectedGame && api && <Header selectedGame={selectedGame} onClickChange={() => plugin.reset()} onClickRefresh={refreshGame}/>}
     </div>
   );
 }

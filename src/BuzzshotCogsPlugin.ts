@@ -43,6 +43,7 @@ type Events = {
   api: CustomEvent<BuzzshotApi>;
   configError: CustomEvent<string>;
   configSuccess: CustomEvent<void>;
+  showReset: CustomEvent<void>;
 };
 
 export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
@@ -68,8 +69,13 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
     });
     this.connection.addEventListener('open', () => this.updateOutputPortValues());
     this.connection.addEventListener('event', event => this.handleCogsEvent(event.detail.key, event.detail.value));
-    this.connection.addEventListener('message', e => console.log(e));
-    this.connection.addEventListener('event', e => console.log(e));
+    this.connection.addEventListener('message', e => {
+      if (e.detail.type === "show_reset") {
+        this.reset();
+        this.dispatchTypedEvent("showReset", new CustomEvent("showReset", {}))
+      }
+    });
+    // this.connection.addEventListener('event', e => console.log(e));
   }
 
   private forceWindow() {
@@ -116,17 +122,17 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
     if (this.connection == null) return;
     const values:Partial<CogsConnectionParams["outputPorts"]> = {
       "Game Selected": !!this.game,
-      "Team Name": this.game?.name,
-      "Player Count": this.game?.group.players.length,
-      "Player 1 Name": this.game?.group.players[0]?.first_name,
-      "Player 2 Name": this.game?.group.players[1]?.first_name,
-      "Player 3 Name": this.game?.group.players[2]?.first_name,
-      "Player 4 Name": this.game?.group.players[3]?.first_name,
-      "Player 5 Name": this.game?.group.players[4]?.first_name,
-      "Player 6 Name": this.game?.group.players[5]?.first_name,
-      "Player 7 Name": this.game?.group.players[6]?.first_name,
-      "Player 8 Name": this.game?.group.players[7]?.first_name,
-      "Player 9 Name": this.game?.group.players[8]?.first_name,
+      "Team Name": this.game?.name ?? "",
+      "Player Count": this.game?.group.players.length ?? 0,
+      "Player 1 Name": this.game?.group.players[0]?.first_name ?? "",
+      "Player 2 Name": this.game?.group.players[1]?.first_name ?? "",
+      "Player 3 Name": this.game?.group.players[2]?.first_name ?? "",
+      "Player 4 Name": this.game?.group.players[3]?.first_name ?? "",
+      "Player 5 Name": this.game?.group.players[4]?.first_name ?? "",
+      "Player 6 Name": this.game?.group.players[5]?.first_name ?? "",
+      "Player 7 Name": this.game?.group.players[6]?.first_name ?? "",
+      "Player 8 Name": this.game?.group.players[7]?.first_name ?? "",
+      "Player 9 Name": this.game?.group.players[8]?.first_name ?? "",
     }
     this.connection.setOutputPortValues(values);
   }
@@ -138,7 +144,7 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
   }
 
   reset() {
-    this.connection.close();
+    this.setGame(undefined)
   }
 
   close() {

@@ -1,6 +1,6 @@
 {
   "name": "cogs-plugin-buzzshot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
     "@buzzshot/api": "^0.1.4",
