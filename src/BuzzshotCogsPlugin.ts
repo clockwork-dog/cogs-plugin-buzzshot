@@ -8,6 +8,7 @@ import { BuzzshotApi, Game } from "@buzzshot/api";
 interface CogsConnectionParams {
   config: {
     "API Key": string;
+    "Room Name (leave blank for all)": string;
   };
   inputPorts: {
     "Team Name": string;
@@ -42,20 +43,22 @@ type Events = {
   game: CustomEvent<Game|undefined>;
   api: CustomEvent<BuzzshotApi>;
   configError: CustomEvent<string>;
-  configSuccess: CustomEvent<void>;
+  configSuccess: CustomEvent<CogsConnectionParams["config"]>;
   showReset: CustomEvent<void>;
 };
 
 export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
   connection: CogsConnection<CogsConnectionParams>;
-  api?: BuzzshotApi
+  api?: BuzzshotApi;
+  config?: CogsConnectionParams["config"];
   game?: Game;
 
   constructor() {
     super()
     this.connection = new CogsConnection<CogsConnectionParams>();
     this.connection.addEventListener('config', (event) => {
-      const apiKey = event.detail["API Key"];
+      this.config = event.detail;
+      const apiKey = this.config["API Key"];
       if (!apiKey) {
         this.dispatchTypedEvent("configError", new CustomEvent("configError", {detail: "Please supply a Buzzshot API Key in the plugin settings"}));
         return;
@@ -65,7 +68,7 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
       this.dispatchTypedEvent("api", new CustomEvent("api", {detail: api}));
       this.updateOutputPortValues();
       this.forceWindow();
-        this.dispatchTypedEvent("configSuccess", new CustomEvent("configSuccess", {}));
+      this.dispatchTypedEvent("configSuccess", new CustomEvent("configSuccess", {}));
     });
     this.connection.addEventListener('open', () => this.updateOutputPortValues());
     this.connection.addEventListener('event', event => this.handleCogsEvent(event.detail.key, event.detail.value));

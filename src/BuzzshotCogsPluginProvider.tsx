@@ -65,8 +65,24 @@ export function useBuzzshotConfigError() {
   return error;
 }
 
+export function useBuzzshotConfig() {
+  const plugin = useBuzzshotCogsPlugin();
+  const [, forceUpdate] = useState({});
+  const update = () => forceUpdate({});
+  useEffect(() => {
+    plugin.addEventListener('configError', update);
+    plugin.addEventListener('configSuccess', update);
+    return () => {
+      plugin.removeEventListener('configError', update);
+      plugin.removeEventListener('configSuccess', update);
+    };
+  })
+  return plugin.config;
+}
+
 
 export function useGamesToday() {
+  const config = useBuzzshotConfig();
   const api = useBuzzshotApi();
 
   const [refresh, setRefresh] = useState(1);
@@ -78,13 +94,14 @@ export function useGamesToday() {
   useEffect(() => {
     if (api) {
       setLoading(true);
-      api.games.list({page, date: "today", complete: false}).then(
+      const room = config ? config["Room Name (leave blank for all)"] : "";
+      api.games.list({page, date: "today", complete: false, room}).then(
         r => {setError(undefined); setResults(r); setLoading(false)},
         e => {setError(e); setLoading(false)}
       );
 
     }
-  }, [api, page, refresh, setLoading, setError, setResults]);
+  }, [config, api, page, refresh, setLoading, setError, setResults]);
 
   return {
     page,

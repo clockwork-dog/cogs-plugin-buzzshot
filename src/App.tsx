@@ -51,7 +51,7 @@ function SelectGame(props: { onSelectGame: (g: Game) => void }) {
     <div className="fixed inset-0 bg-white flex flex-col">
       {games.loading && <Message>Loading games</Message>}
       {games.error && <Message><div>Failed to load games</div><BlueButton onClick={games.refresh}>Try Again</BlueButton></Message>}
-      <h1 className="text-3xl text-center text-gray-500 font-bold p-4">Select the Buzzshot group playing</h1>
+      <h1 className="text-3xl text-center text-gray-500 font-bold p-4">Select the Buzzshot game playing</h1>
       { games.results.length === 0 ? (
           <div className="grow flex items-center justify-center">
             <div className="text-gray-400 text-xl">No pending groups for today</div>
