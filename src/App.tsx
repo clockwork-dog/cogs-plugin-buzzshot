@@ -57,7 +57,7 @@ function SelectGame(props: { onSelectGame: (g: Game) => void }) {
             <div className="text-gray-400 text-xl">No pending groups for today</div>
           </div>
       ) : (
-      <ul className="grow flex flex-col items-stretch gap-1 p-4 ">
+      <ul className="grow flex flex-col items-stretch gap-1 p-4 min-h-0">
         {games.results.map((game) => (
           <li key={game.id} className="flex flex-col items-stretch">
             <GameButton game={game} onClick={props.onSelectGame} />

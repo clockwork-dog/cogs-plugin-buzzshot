@@ -95,6 +95,9 @@
       },
       {
         "name": "Complete Game"
+      },
+      {
+        "name": "Auto Choose Game"
       }
     ]
   }

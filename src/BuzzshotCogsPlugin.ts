@@ -36,6 +36,7 @@ interface CogsConnectionParams {
     "Set Completion Time (milliseconds)": number;
     "Set Hints": number;
     "Complete Game": string;
+    "Auto Choose Game": string;
   };
 }
 
@@ -89,35 +90,60 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
   }
 
   private handleCogsEvent<K extends keyof CogsConnectionParams["inputEvents"], V extends CogsConnectionParams["inputEvents"][K]>(key: K, value: V) {
-    if (this.api == null || this.game == null) return;
+    if (this.api == null) return;
     const api = this.api;
-    const game = this.game;
+    if (key === "Auto Choose Game") {
+      const room = this.config ? this.config["Room Name (leave blank for all)"] : "";
+      // Only look at the first page, should be enough?
+      (async () => {
+        let games = (await api.games.list({date: "today", complete: false, room})).results();
+        console.log(1, games)
+        // Only games with a start time
+        games = games.filter(g => g.start_at);
+        console.log(2, games)
+        const secondsToCurrentTime = (g:Game) => {
+          return Math.abs(new Date(g.start_at).getTime()-Date.now());
+        }
+        games.sort((a,b) => secondsToCurrentTime(a)-secondsToCurrentTime(b));
+        console.log(3, games)
+        if (games.length) {
+          this.setGame(games[0]);
+        }
+      })();
+    } else {
+      if (this.game == null) return;
+      const game = this.game;
 
-    const events:Record<keyof CogsConnectionParams["inputEvents"], (v:any) => Game> = {
-      "Set Team Name": (name:string) => {
-        api.games.update({id: game.id}, {name});
-        return {...game, name};
-      },
-      "Set Did Win": (did_win:boolean) => {
-        api.games.update({id: game.id}, {game_result: {did_win}});
-        return {...game, game_result: {...game.game_result, did_win}};
-      },
-      "Set Completion Time (milliseconds)": (completion_time:number) => {
-        completion_time = Math.round(completion_time/1000);
-        api.games.update({id: game.id}, {game_result: {completion_time}});
-        return {...game, game_result: {...game.game_result, completion_time}};
-      },
-      "Set Hints": (hints:number) => {
-        api.games.update({id: game.id}, {game_result: {hints}});
-        return {...game, game_result: {...game.game_result, hints}};
-      },
-      "Complete Game": () => {
-        api.games.update({id: game.id}, {is_complete: true});
-        return {...game, is_complete: true};
+      type PartialRecord<K extends keyof any, T> = {
+        [P in K]?: T;
+      };
+      const events:PartialRecord<keyof CogsConnectionParams["inputEvents"], (v:any) => Game> = {
+        "Set Team Name": (name:string) => {
+          api.games.update({id: game.id}, {name});
+          return {...game, name};
+        },
+        "Set Did Win": (did_win:boolean) => {
+          api.games.update({id: game.id}, {game_result: {did_win}});
+          return {...game, game_result: {...game.game_result, did_win}};
+        },
+        "Set Completion Time (milliseconds)": (completion_time:number) => {
+          completion_time = Math.round(completion_time/1000);
+          api.games.update({id: game.id}, {game_result: {completion_time}});
+          return {...game, game_result: {...game.game_result, completion_time}};
+        },
+        "Set Hints": (hints:number) => {
+          api.games.update({id: game.id}, {game_result: {hints}});
+          return {...game, game_result: {...game.game_result, hints}};
+        },
+        "Complete Game": () => {
+          api.games.update({id: game.id}, {is_complete: true});
+          return {...game, is_complete: true};
+        },
+      } as const;
+      const handler = events[key];
+      if (handler != null) {
+        this.setGame(handler(value));
       }
-    } as const;
-    if (key in events) {
-      this.setGame(events[key](value));
     }
   }
 
