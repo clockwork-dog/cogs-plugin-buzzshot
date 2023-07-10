@@ -1,6 +1,6 @@
 {
   "name": "Buzzshot",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Exchange data between Buzzshot and COGS",
   "indexPath": "index.html",
   "icon": "./buzzshot.png",
