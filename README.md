@@ -20,7 +20,7 @@ the file named `com.buzzshot.cogs.zip`.
 2. Unzip the file into the `plugins` folder
 in your COGS project, you should now have a `com.buzzshot.cogs` folder in your
 `plugins` folder in your project.
-3. Open the project in COGS enable the Buzzshot plugin under Setup -> Settings.
+3. Open the project in COGS and enable the Buzzshot plugin under Setup -> Settings.
 4. You should now see the Buzzshot logo in the list of icons to on the left. Click the Buzzshot Logo.
 5. Enter your Buzzshot API Key in the "API Key" field
 6. Enter the name of the room that corresponds to this room (EXACTLY as it appears in Buzzshot) in the Room Name field
