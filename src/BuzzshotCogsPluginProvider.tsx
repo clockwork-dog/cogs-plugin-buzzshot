@@ -89,10 +89,12 @@ export function useGamesToday() {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState<ResponsePage<Game>|undefined>();
-  const [error, setError] = useState<BuzzshotApiException|undefined>();
+  const [error, setError] = useState<BuzzshotApiException|Error|undefined>();
 
   useEffect(() => {
-    if (api) {
+    if (!config || !config["API Key"]) {
+      setError(new Error("Please configure your Buzzshot API Key"))
+    } else if (api) {
       setLoading(true);
       const room = config ? config["Room Name (leave blank for all)"] : "";
       api.games.list({page, date: "today", complete: false, room}).then(
