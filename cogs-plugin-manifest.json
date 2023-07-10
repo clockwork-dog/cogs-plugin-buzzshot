@@ -3,7 +3,7 @@
   "version": "0.1.4",
   "description": "Exchange data between Buzzshot and COGS",
   "indexPath": "index.html",
-  "icon": "cactus",
+  "icon": "./buzzshot.png",
   "config": [
     { "name": "API Key", "value": { "type": "string" } },
     { "name": "Room Name (leave blank for all)", "value": { "type": "string" } }
