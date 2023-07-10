@@ -11,7 +11,6 @@ interface CogsConnectionParams {
     "Room Name (leave blank for all)": string;
   };
   inputPorts: {
-    "Team Name": string;
   };
   outputPorts: {
     "Team Name": string;
@@ -93,19 +92,16 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
     if (this.api == null) return;
     const api = this.api;
     if (key === "Auto Choose Game") {
-      const room = this.config ? this.config["Room Name (leave blank for all)"] : "";
+      const room = value || (this.config ? this.config["Room Name (leave blank for all)"] : "");
       // Only look at the first page, should be enough?
       (async () => {
         let games = (await api.games.list({date: "today", complete: false, room})).results();
-        console.log(1, games)
         // Only games with a start time
         games = games.filter(g => g.start_at);
-        console.log(2, games)
         const secondsToCurrentTime = (g:Game) => {
           return Math.abs(new Date(g.start_at).getTime()-Date.now());
         }
         games.sort((a,b) => secondsToCurrentTime(a)-secondsToCurrentTime(b));
-        console.log(3, games)
         if (games.length) {
           this.setGame(games[0]);
         }
