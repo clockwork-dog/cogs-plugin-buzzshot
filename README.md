@@ -1,6 +1,8 @@
 # COGS <-> Buzzshot
 
-This plugin allows you to automatically transfer data between Buzzshot and COGS.
+THIS IS AN EARLY VERSION, LET US KNOW IF YOU WANT IT TO DO MORE!
+
+This plugin allows you to automatically transfer data between [Buzzshot](https://buzzshot.com) and [COGS](https://cogs.show/).
 It will give you a window when you start your COGS show in which you can select
 a Buzzshot game. If you would prefer to automatically choose the game based on
 the current time then see the "Auto Choose Game" action below.
