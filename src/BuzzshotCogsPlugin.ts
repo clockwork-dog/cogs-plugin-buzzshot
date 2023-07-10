@@ -92,7 +92,7 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
     if (this.api == null) return;
     const api = this.api;
     if (key === "Auto Choose Game") {
-      const room = value || (this.config ? this.config["Room Name (leave blank for all)"] : "");
+      const room = (value || (this.config ? this.config["Room Name (leave blank for all)"] : "")) as string;
       // Only look at the first page, should be enough?
       (async () => {
         let games = (await api.games.list({date: "today", complete: false, room})).results();
