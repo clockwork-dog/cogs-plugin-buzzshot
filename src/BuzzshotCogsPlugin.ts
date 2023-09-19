@@ -5,6 +5,10 @@ import { TypedEventTarget } from 'typescript-event-target';
 
 import { BuzzshotApi, Game } from "@buzzshot/api";
 
+function isPromise<T, S>(obj: PromiseLike<T> | S): obj is PromiseLike<T> {
+  return !!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof (obj as any).then === 'function';
+}
+
 interface CogsConnectionParams {
   config: {
     "API Key": string;
@@ -25,6 +29,7 @@ interface CogsConnectionParams {
     "Player 7 Name": string;
     "Player 8 Name": string;
     "Player 9 Name": string;
+    "Game Master Name": string;
   };
   outputEvents: {
     "Game Selected": string;
@@ -34,6 +39,7 @@ interface CogsConnectionParams {
     "Set Did Win": boolean;
     "Set Completion Time (milliseconds)": number;
     "Set Hints": number;
+    "Set Game Master Name": string;
     "Complete Game": string;
     "Auto Choose Game": string;
   };
@@ -113,7 +119,7 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
       type PartialRecord<K extends keyof any, T> = {
         [P in K]?: T;
       };
-      const events:PartialRecord<keyof CogsConnectionParams["inputEvents"], (v:any) => Game> = {
+      const events:PartialRecord<keyof CogsConnectionParams["inputEvents"], (v:any) => Game | Promise<Game>> = {
         "Set Team Name": (name:string) => {
           api.games.update({id: game.id}, {name});
           return {...game, name};
@@ -131,6 +137,9 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
           api.games.update({id: game.id}, {game_result: {hints}});
           return {...game, game_result: {...game.game_result, hints}};
         },
+        "Set Game Master Name": (game_master_name:string) => {
+          return api.games.update({id: game.id}, {game_master_name});
+        },
         "Complete Game": () => {
           api.games.update({id: game.id}, {is_complete: true});
           return {...game, is_complete: true};
@@ -138,7 +147,12 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
       } as const;
       const handler = events[key];
       if (handler != null) {
-        this.setGame(handler(value));
+        const result = handler(value);
+        if (isPromise(result)) {
+          result.then(game => this.setGame(game));
+        } else {
+          this.setGame(result);
+        }
       }
     }
   }
@@ -158,6 +172,7 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
       "Player 7 Name": this.game?.group.players[6]?.first_name ?? "",
       "Player 8 Name": this.game?.group.players[7]?.first_name ?? "",
       "Player 9 Name": this.game?.group.players[8]?.first_name ?? "",
+      "Game Master Name": this.game?.game_master?.name ?? "",
     }
     this.connection.setOutputPortValues(values);
   }

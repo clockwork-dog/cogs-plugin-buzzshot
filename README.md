@@ -44,6 +44,7 @@ This plugin will currently make the following data available to your COGS show:
 - Player 7 Name
 - Player 8 Name
 - Player 9 Name
+- Game Master Name
     
 Want more information from Buzzshot to use in COGS? Let us know!
 
@@ -56,6 +57,7 @@ You can use the following actions within COGS to send data back to Buzzshot:
 - Set Did Win: Pass true or false to set the win state in Buzzshot
 - Set Completion Time (milliseconds): Pass a number of miliseconds to set the completion time
 - Set Hints: Pass a number to set the number of hints
+- Set Game Master Name: Pass the name of the game master you wish to assign (will be created if they don't exist)
 - Complete Game: Use this action to complete the game in Buzzshot (you usually only want to do this after the photos have been added)
  
 Again, if you want something that isn't here then please let us know!

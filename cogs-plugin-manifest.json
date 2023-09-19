@@ -72,6 +72,11 @@
     "name": "Player 9 Name",
     "value": {"type": "string", "default": ""},
     "writableFromClient": true
+  },
+    {
+    "name": "Game Master Name",
+    "value": {"type": "string", "default": ""},
+    "writableFromClient": true
   }
   ],
   "events": {
@@ -92,6 +97,10 @@
       {
         "name": "Set Hints",
         "value": { "type": "number" }
+      },
+      {
+        "name": "Set Game Master Name",
+        "value": { "type": "string" }
       },
       {
         "name": "Complete Game"
