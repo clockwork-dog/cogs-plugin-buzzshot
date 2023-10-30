@@ -62,6 +62,16 @@ You can use the following actions within COGS to send data back to Buzzshot:
  
 Again, if you want something that isn't here then please let us know!
  
+# Sending game timer to Buzzshot
+
+If you're using the Timer plugin (included with COGS) you may want to send the
+final value to Buzzshot as the "Completion Time". To do this add a "Show
+Finished" Behaviour in COGS and "BUZZSHOT: SET COMPLETION TIME (MILISECONDS)"
+then click the little down arrow to the right of the value and select "Custom
+value" then enter `timer.duration - time.remaining`.
+
+If you have Buzzshot set to work with remaining time instead of elapsed time
+then you will want to enter just `timer.remaining` in the custom value field.
  
 # Automatically selecting game
 
