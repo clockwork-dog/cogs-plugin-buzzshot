@@ -10,11 +10,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 16.x
           cache: "yarn"
@@ -22,7 +22,7 @@ jobs:
       - run: yarn build
       - working-directory: build
         run: zip -r com.buzzshot.cogs.zip com.buzzshot.cogs
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: com.buzzshot.cogs.zip
           path: build/com.buzzshot.cogs.zip
