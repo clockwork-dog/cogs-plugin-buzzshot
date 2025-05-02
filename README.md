@@ -45,6 +45,7 @@ This plugin will currently make the following data available to your COGS show:
 - Player 8 Name
 - Player 9 Name
 - Game Master Name
+- Room Name
     
 Want more information from Buzzshot to use in COGS? Let us know!
 

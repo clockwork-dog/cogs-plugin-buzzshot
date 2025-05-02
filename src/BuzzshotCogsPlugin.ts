@@ -30,6 +30,7 @@ interface CogsConnectionParams {
     "Player 8 Name": string;
     "Player 9 Name": string;
     "Game Master Name": string;
+    "Room Name": string;
   };
   outputEvents: {
     "Game Selected": string;
@@ -173,6 +174,7 @@ export class BuzzshotCogsPlugin extends TypedEventTarget<Events> {
       "Player 8 Name": this.game?.group.players[7]?.first_name ?? "",
       "Player 9 Name": this.game?.group.players[8]?.first_name ?? "",
       "Game Master Name": this.game?.game_master?.name ?? "",
+      "Room Name": this.game?.room?.name ?? "",
     }
     this.connection.setOutputPortValues(values);
   }
